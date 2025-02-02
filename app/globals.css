@@ -164,6 +164,12 @@ main {
   object-fit: cover;
 }
 
+.post-image{
+  position: relative;
+  width: 8rem;
+  height: 6rem;
+}
+
 .post-content {
   flex: 1;
 }

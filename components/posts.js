@@ -3,12 +3,36 @@ import { formatDate } from "@/lib/format";
 import { useOptimistic } from "react";
 import LikeButton from "./like-icon";
 import { toggleLikeOnPost } from "@/actions/posts-actions";
+import Image from "next/image";
+
+function imageLoader(config) {
+  const urlStart = config.src.split("upload/")[0];
+  const urlEnd = config.src.split("upload/")[1];
+  const urlMiddle = `w_200,q_${config.quality}`;
+
+  return `${urlStart}upload/${urlMiddle}/${urlEnd}`;
+}
+
+// export async function generateMetadata(params) {
+//   return {
+//     title: "Browse all posts",
+//     description: "Browsing Posts",
+//   };
+// }  //this function helps to generate dynamic metadata that can be used for SEO
 
 function Post({ post, action }) {
   return (
     <article className="post">
       <div className="post-image">
-        <img src={post.image} alt={post.title} />
+        <Image
+          width={200}
+          height={150}
+          loader={imageLoader}
+          src={post.image}
+          alt={post.title}
+          priority
+          quality={50}
+        />
       </div>
       <div className="post-content">
         <header>
